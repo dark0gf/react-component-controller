@@ -2,6 +2,14 @@ import React from "react";
 
 export abstract class ControllerAbstract<P> {
     private triggerUpdateCallback: React.Dispatch<React.SetStateAction<number>> | undefined;
+    protected props: P
+
+    constructor(props: P) {
+        this.props = props;
+    }
+
+
+
     setTriggerUpdate(triggerUpdateCallback: React.Dispatch<React.SetStateAction<number>>) {
         this.triggerUpdateCallback = triggerUpdateCallback;
     }
