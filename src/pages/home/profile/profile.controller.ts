@@ -10,8 +10,8 @@ export class ProfileController extends ControllerAbstract<TProfile> {
         await this.loadDataOnInit(props.username);
     }
 
-    componentRender = async (props: TProfile) => {
-        console.log('componentRender', this.props, props);
+    componentRender = async () => {
+        console.log('componentRender', this.props);
     }
 
     loadDataOnInit = async (username: string) => {

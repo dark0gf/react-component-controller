@@ -8,18 +8,24 @@ export abstract class ControllerAbstract<P> {
         this.props = props;
     }
 
-
+    setProps(props: P) {
+        this.props = props;
+    }
 
     setTriggerUpdate(triggerUpdateCallback: React.Dispatch<React.SetStateAction<number>>) {
         this.triggerUpdateCallback = triggerUpdateCallback;
+    }
+
+    componentPropsChanged = (prevProps: P) => {
+        console.log('ControllerAbstract componentPropsChanged', { prevProps });
     }
 
     componentCreated = (props: P) => {
         console.log('ControllerAbstract componentCreated', props);
     }
 
-    componentRender = (props: P) => {
-        console.log('ControllerAbstract componentRender', props);
+    componentRender = () => {
+        console.log('ControllerAbstract componentRender');
     }
 
     componentDestroy = (props: P) => {

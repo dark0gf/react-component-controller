@@ -3,7 +3,7 @@ import {useController} from "../../../poc/hooks.ts";
 import {TProfile} from "./types.tsx";
 
 export const ProfileWithController = (props: TProfile) => {
-    const ctrl = useController(() => new ProfileController(), props);
+    const ctrl = useController(() => new ProfileController(props), props);
 
     return <div className='m-4'>
         <div>props: {JSON.stringify(props)}</div>
