@@ -8,10 +8,12 @@ export abstract class ControllerAbstract<P> {
         this.props = props;
     }
 
+    //** Do not override this method, internal use only */
     setProps(props: P) {
         this.props = props;
     }
 
+    //** Do not override this method, internal use only */
     setTriggerUpdate(triggerUpdateCallback: React.Dispatch<React.SetStateAction<number>>) {
         this.triggerUpdateCallback = triggerUpdateCallback;
     }
@@ -28,8 +30,8 @@ export abstract class ControllerAbstract<P> {
         console.log('ControllerAbstract componentRender');
     }
 
-    componentDestroy = (props: P) => {
-        console.log('ControllerAbstract componentDestroy', props);
+    componentDestroy = () => {
+        console.log('ControllerAbstract componentDestroy');
     }
 
     triggerUpdate = () => {
