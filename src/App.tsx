@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from "react-router";
-import {Home} from "./pages/home/Home.tsx";
+import {Home} from "./pages/home/Home";
 
 function App() {
   return (

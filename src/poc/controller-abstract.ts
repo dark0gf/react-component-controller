@@ -19,7 +19,7 @@ export abstract class ControllerAbstract<P> {
     }
 
     componentPropsChanged = (prevProps: P) => {
-        console.log('ControllerAbstract componentPropsChanged', { prevProps });
+        console.log('ControllerAbstract componentPropsChanged', { props: this.props, prevProps });
     }
 
     componentCreated = (props: P) => {
@@ -36,7 +36,7 @@ export abstract class ControllerAbstract<P> {
 
     triggerUpdate = () => {
         if (!this.triggerUpdateCallback) {
-            console.error('No triggerUpdateCallback is not set, update of react component will not happen');
+            console.error('No triggerUpdateCallback is set, update of react component will not happen');
             return;
         }
         this.triggerUpdateCallback(prev => prev + 1);
