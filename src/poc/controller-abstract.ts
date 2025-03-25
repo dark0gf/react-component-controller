@@ -6,15 +6,25 @@ export abstract class ControllerAbstract<P> {
 
     constructor(props: P) {
         this.props = props;
+        // Create a proxy for the controller instance
+        return new Proxy(this, {
+            set: (target, prop, value) => {
+                (target as any)[prop] = value;
+                if (prop !== 'props' && prop !== 'triggerUpdateCallback') {
+                    target.triggerUpdate();
+                }
+                return true;
+            }
+        });
     }
 
     //** Do not override this method, internal use only */
-    setProps(props: P) {
+    setProps = (props: P) => {
         this.props = props;
     }
 
     //** Do not override this method, internal use only */
-    setTriggerUpdate(triggerUpdateCallback: React.Dispatch<React.SetStateAction<number>>) {
+    setTriggerUpdate = (triggerUpdateCallback: React.Dispatch<React.SetStateAction<number>>) => {
         this.triggerUpdateCallback = triggerUpdateCallback;
     }
 
@@ -40,5 +50,16 @@ export abstract class ControllerAbstract<P> {
             return;
         }
         this.triggerUpdateCallback(prev => prev + 1);
+    }
+
+    protected createReactive<T>(value?: T): T | undefined {
+        return new Proxy({ value }, {
+            get: (target) => target.value,
+            set: (target, _, newValue) => {
+                target.value = newValue;
+                this.triggerUpdate();
+                return true;
+            }
+        }).value;
     }
 }
