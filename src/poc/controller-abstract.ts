@@ -6,16 +6,6 @@ export abstract class ControllerAbstract<P> {
 
     constructor(props: P) {
         this.props = props;
-        // Create a proxy for the controller instance
-        return new Proxy(this, {
-            set: (target, prop, value) => {
-                (target as any)[prop] = value;
-                if (prop !== 'props' && prop !== 'triggerUpdateCallback') {
-                    target.triggerUpdate();
-                }
-                return true;
-            }
-        });
     }
 
     //** Do not override this method, internal use only */
@@ -28,20 +18,18 @@ export abstract class ControllerAbstract<P> {
         this.triggerUpdateCallback = triggerUpdateCallback;
     }
 
+    // @ts-ignore
     componentPropsChanged = (prevProps: P) => {
-        console.log('ControllerAbstract componentPropsChanged', { props: this.props, prevProps });
     }
 
+    // @ts-ignore
     componentCreated = (props: P) => {
-        console.log('ControllerAbstract componentCreated', props);
     }
 
     componentRender = () => {
-        console.log('ControllerAbstract componentRender');
     }
 
     componentDestroy = () => {
-        console.log('ControllerAbstract componentDestroy');
     }
 
     triggerUpdate = () => {
@@ -50,16 +38,5 @@ export abstract class ControllerAbstract<P> {
             return;
         }
         this.triggerUpdateCallback(prev => prev + 1);
-    }
-
-    protected createReactive<T>(value?: T): T | undefined {
-        return new Proxy({ value }, {
-            get: (target) => target.value,
-            set: (target, _, newValue) => {
-                target.value = newValue;
-                this.triggerUpdate();
-                return true;
-            }
-        }).value;
     }
 }
