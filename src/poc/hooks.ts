@@ -6,8 +6,10 @@ export const useController = <T extends ControllerAbstract<P>, P extends object>
     const prevPropsRef  = useRef<P>(props);
     const [, triggerUpdate] = useState(0);
 
+    // Set up the trigger update callback immediately
+    memoController.setTriggerUpdate(triggerUpdate);
+
     useEffect(() => {
-        memoController.setTriggerUpdate(triggerUpdate);
         memoController.componentCreated(props);
         return () => memoController.componentDestroy();
     }, []);

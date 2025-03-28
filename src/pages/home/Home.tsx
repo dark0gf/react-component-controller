@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Profile } from "./profile/Profile";
-import { ProfileWithController } from "./profile/ProfileWithController";
+import { ProfileWithHooks } from "./profileWithHooks/ProfileWithHooks.tsx";
+import { ProfileWithController } from "./profileWithController/ProfileWithController.tsx";
 
 export const Home = () => {
     const [showProfile, setShowProfile] = useState(true);
@@ -28,10 +28,10 @@ export const Home = () => {
                             onClick={() => setShowProfile(!showProfile)}
                             className="bg-blue-500 text-white px-4 py-2 rounded w-full"
                         >
-                            {showProfile ? 'Hide' : 'Show'} Profile
+                            {showProfile ? 'Destroy' : 'Create'} ProfileWithHooks
                         </button>
                     </div>
-                    {showProfile && <Profile username={profileUsername} />}
+                    {showProfile && <ProfileWithHooks username={profileUsername} />}
                 </div>
 
                 {/* ProfileWithController Column */}
@@ -49,7 +49,7 @@ export const Home = () => {
                         </div>
                         <button 
                             onClick={() => setShowProfileWithController(!showProfileWithController)}
-                            className="bg-green-500 text-white px-4 py-2 rounded w-full"
+                            className="bg-blue-500 text-white px-4 py-2 rounded w-full"
                         >
                             {showProfileWithController ? 'Hide' : 'Show'} ProfileWithController
                         </button>

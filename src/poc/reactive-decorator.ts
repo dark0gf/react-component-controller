@@ -13,6 +13,7 @@ export function Reactive() {
         return this[privateKey];
       },
       set(value: any) {
+        console.log(this);
         this[privateKey] = value;
         this.triggerUpdate();
       },
