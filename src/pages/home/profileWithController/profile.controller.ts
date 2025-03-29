@@ -16,7 +16,7 @@ export class ProfileController extends ControllerAbstract<TProfile> {
         }
     }
 
-    loadData = () => {
-        this.state.value2 = Math.random().toString();
+    loadData = async () => {
+        this.state.value2 = await fetchProfile(Math.random().toString());
     }
 }
