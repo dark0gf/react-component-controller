@@ -1,19 +1,13 @@
 import {ControllerAbstract} from "../../../poc/controller-abstract.ts";
-import {fetchProfile} from "../../../services/data.service.ts";
 import {TProfile} from "../types.tsx";
-import {Reactive} from "../../../poc/reactive-decorator.ts";
+import {fetchProfile} from "../../../services/data.service.ts";
 
 export class ProfileController extends ControllerAbstract<TProfile> {
-    @Reactive()
-    someValue = "init value";
+    state = this.createReactive<{value1?: string, value2?: string}>({});
 
-    @Reactive()
-    otherValue?: string;
-
-    componentCreated = async (props: TProfile) => {
-        console.log('fetching profile');
-        this.someValue = 'test';
-        this.someValue = await fetchProfile(props.username);
+    // Changed from arrow function to regular method for consistent behavior with decorators
+    componentCreated = async () => {
+        this.state.value1 = await fetchProfile(this.props.username);
     }
 
     componentPropsChanged = (prevProps: TProfile) => {
@@ -22,7 +16,7 @@ export class ProfileController extends ControllerAbstract<TProfile> {
         }
     }
 
-    loadData = async () => {
-        this.otherValue = await fetchProfile(Math.random().toString());
+    loadData = () => {
+        this.state.value2 = Math.random().toString();
     }
 }

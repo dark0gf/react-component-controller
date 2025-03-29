@@ -18,12 +18,49 @@ export abstract class ControllerAbstract<P> {
         this.triggerUpdateCallback = triggerUpdateCallback;
     }
 
+    //** Do not override this method, use for reactive update */
+    createReactive = <T extends object>(target: T): T => {
+        const self = this;
+
+        // Handler for the Proxy
+        const handler: ProxyHandler<any> = {
+            get(target, property, receiver) {
+                const value = Reflect.get(target, property, receiver);
+
+                if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                    return self.createReactive(value);
+                }
+
+                if (Array.isArray(value)) {
+                    return self.createReactive(value);
+                }
+
+                return value;
+            },
+            set(target, property, value, receiver) {
+                const result = Reflect.set(target, property, value, receiver);
+                self.triggerUpdate();
+                return result;
+            },
+
+            deleteProperty(target, property) {
+                const result = Reflect.deleteProperty(target, property);
+                self.triggerUpdate();
+
+                return result;
+            }
+        };
+
+        // Create and return a proxy for the target object
+        return new Proxy(target, handler);
+    }
+
     // @ts-ignore
     componentPropsChanged = (prevProps: P) => {
     }
 
     // @ts-ignore
-    componentCreated = (props: P) => {
+    componentCreated = () => {
     }
 
     componentRender = () => {
