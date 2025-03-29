@@ -22,16 +22,11 @@ export abstract class ControllerAbstract<P> {
     createReactive = <T extends object>(target: T): T => {
         const self = this;
 
-        // Handler for the Proxy
         const handler: ProxyHandler<any> = {
             get(target, property, receiver) {
                 const value = Reflect.get(target, property, receiver);
 
-                if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                    return self.createReactive(value);
-                }
-
-                if (Array.isArray(value)) {
+                if (typeof value === 'object' && value !== null) {
                     return self.createReactive(value);
                 }
 
@@ -42,16 +37,12 @@ export abstract class ControllerAbstract<P> {
                 self.triggerUpdate();
                 return result;
             },
-
             deleteProperty(target, property) {
                 const result = Reflect.deleteProperty(target, property);
                 self.triggerUpdate();
-
                 return result;
             }
         };
-
-        // Create and return a proxy for the target object
         return new Proxy(target, handler);
     }
 

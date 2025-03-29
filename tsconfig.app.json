@@ -15,10 +15,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Decorator support */
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
