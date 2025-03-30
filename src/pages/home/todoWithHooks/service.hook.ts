@@ -2,7 +2,6 @@ import {TProfile} from "../types.tsx";
 import {useCallback, useEffect, useState} from "react";
 import {fetchProfile} from "../../../services/data.service.ts";
 
-// Define the Todo type
 export type Todo = {
     id: number;
     text: string;
@@ -10,25 +9,12 @@ export type Todo = {
 };
 
 export const useService = (props: TProfile) => {
-    const [someValue, setSomeValue] = useState<string>("init value");
-    const [otherValue, setOtherValue] = useState<string>();
-
-    // Todo list state
     const [todos, setTodos] = useState<Todo[]>([
         { id: 1, text: 'Learn React', completed: true },
         { id: 2, text: 'Build a todo app', completed: false }
     ]);
     const [newTodoText, setNewTodoText] = useState<string>("");
 
-    useEffect(() => {
-        (async () => {
-            setSomeValue(await fetchProfile(Math.random().toString()));
-        })()
-    }, []);
-
-    const loadData = useCallback(async () => {
-        setOtherValue(await fetchProfile(Math.random().toString()));
-    }, []);
 
     useEffect(() => {
         console.log('ProfileWithHooks username changed', props.username);
@@ -63,10 +49,6 @@ export const useService = (props: TProfile) => {
     }, []);
 
     return {
-        someValue,
-        otherValue,
-        loadData,
-        // Todo list related
         todos,
         newTodoText,
         setNewTodoText,

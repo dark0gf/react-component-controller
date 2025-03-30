@@ -1,26 +1,13 @@
-import {ProfileController, Todo} from "./profile.controller.ts";
+import {TodoController, Todo} from "./Todo.controller.ts";
 import {useController} from "../../../poc/hooks.ts";
 import {TProfile} from "../types.tsx";
 
-export const ProfileWithController = (props: TProfile) => {
-    const ctrl = useController(() => new ProfileController(props), props);
+export const TodoWithController = (props: TProfile) => {
+    const ctrl = useController(() => new TodoController(props), props);
     const state = ctrl.state;
 
     return (
         <div className='m-4'>
-            <div className="mb-4">
-                <h2 className="text-xl font-bold mb-2">User Profile</h2>
-                <div>Username: {props.username}</div>
-                <div>Data from init: {state.value1}</div>
-                <button
-                    onClick={ctrl.loadData}
-                    className='border-2 p-1 mt-2 rounded hover:bg-gray-100'
-                >
-                    Fetch data from controller
-                </button>
-                <div>Result: {state.value2}</div>
-            </div>
-
             <div className="mt-6">
                 <h2 className="text-xl font-bold mb-4">Todo List</h2>
 

@@ -1,6 +1,6 @@
 import {ControllerAbstract} from "../../../poc/controller-abstract.ts";
 import {TProfile} from "../types.tsx";
-import {fetchProfile} from "../../../services/data.service.ts";
+// import {fetchProfile} from "../../../services/data.service.ts";
 
 export interface Todo {
     id: number;
@@ -8,10 +8,8 @@ export interface Todo {
     completed: boolean;
 }
 
-export class ProfileController extends ControllerAbstract<TProfile> {
+export class TodoController extends ControllerAbstract<TProfile> {
     state = this.createReactive<{
-        value1?: string;
-        value2?: string;
         todos: Todo[];
         newTodoText: string;
     }>({
@@ -20,7 +18,6 @@ export class ProfileController extends ControllerAbstract<TProfile> {
     });
 
     componentCreated = async () => {
-        this.state.value1 = await fetchProfile(this.props.username);
         this.state.todos = [
             { id: 1, text: 'Learn React', completed: true },
             { id: 2, text: 'Build a todo app', completed: false }
@@ -29,12 +26,8 @@ export class ProfileController extends ControllerAbstract<TProfile> {
 
     componentPropsChanged = (prevProps: TProfile) => {
         if (prevProps.username !== this.props.username) {
-            console.log('ProfileWithController username changed', this.props.username);
+            console.log('TodoWithController username changed', this.props.username);
         }
-    }
-
-    loadData = async () => {
-        this.state.value2 = await fetchProfile(Math.random().toString());
     }
 
     addTodo = () => {

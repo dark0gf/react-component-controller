@@ -2,7 +2,7 @@ import {TProfile} from "../types.tsx";
 import {useService, Todo} from "./service.hook.ts";
 import React from "react";
 
-export const ProfileWithHooks = (props: TProfile) => {
+export const TodoWithHooks = (props: TProfile) => {
     const service = useService(props);
 
     // Handle Enter key press for adding todos
@@ -13,23 +13,9 @@ export const ProfileWithHooks = (props: TProfile) => {
     };
 
     return <div className='m-4'>
-        <div className="mb-4">
-            <h2 className="text-xl font-bold mb-2">User Profile</h2>
-            <div>Username: {props.username}</div>
-            <div>Data from init: {service.someValue}</div>
-            <button
-                onClick={service.loadData}
-                className='border-2 p-1 mt-2 rounded hover:bg-gray-100'
-            >
-                Fetch data from component
-            </button>
-            <div>Result: {service.otherValue}</div>
-        </div>
-
         <div className="mt-6">
             <h2 className="text-xl font-bold mb-4">Todo List</h2>
 
-            {/* Add new todo form */}
             <div className="flex mb-4">
                 <input
                     type="text"

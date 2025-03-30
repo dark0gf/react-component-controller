@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { ProfileWithHooks } from "./profileWithHooks/ProfileWithHooks.tsx";
-import { ProfileWithController } from "./profileWithController/ProfileWithController.tsx";
+import { TodoWithHooks } from "./todoWithHooks/TodoWithHooks.tsx";
+import {TodoWithController} from "./todoWithController/TodoWithController.tsx";
 
 export const Home = () => {
     const [showProfile, setShowProfile] = useState(true);
-    const [showProfileWithController, setShowProfileWithController] = useState(true);
+    const [showTodoWithController, setshowTodoWithController] = useState(true);
     const [profileUsername, setProfileUsername] = useState("John Doe");
     const [controllerUsername, setControllerUsername] = useState("Jane Smith");
 
@@ -28,15 +28,14 @@ export const Home = () => {
                             onClick={() => setShowProfile(!showProfile)}
                             className="bg-blue-500 text-white px-4 py-2 rounded w-full"
                         >
-                            {showProfile ? 'Destroy' : 'Create'} ProfileWithHooks
+                            {showProfile ? 'Destroy' : 'Create'} TodoWithHooks
                         </button>
                     </div>
-                    {showProfile && <ProfileWithHooks username={profileUsername} />}
+                    {showProfile && <TodoWithHooks username={profileUsername} />}
                 </div>
 
-                {/* ProfileWithController Column */}
                 <div className="border p-4 rounded">
-                    <h3 className="text-lg font-semibold mb-2">ProfileWithController Component</h3>
+                    <h3 className="text-lg font-semibold mb-2">TodoWithController Component</h3>
                     <div className="space-y-4 mb-4">
                         <div>
                             <label className="block mb-2">username:</label>
@@ -48,13 +47,13 @@ export const Home = () => {
                             />
                         </div>
                         <button 
-                            onClick={() => setShowProfileWithController(!showProfileWithController)}
+                            onClick={() => setshowTodoWithController(!showTodoWithController)}
                             className="bg-blue-500 text-white px-4 py-2 rounded w-full"
                         >
-                            {showProfileWithController ? 'Hide' : 'Show'} ProfileWithController
+                            {showTodoWithController ? 'Destroy' : 'Show'} TodoWithController
                         </button>
                     </div>
-                    {showProfileWithController && <ProfileWithController username={controllerUsername} />}
+                    {showTodoWithController && <TodoWithController username={controllerUsername} />}
                 </div>
             </div>
         </div>

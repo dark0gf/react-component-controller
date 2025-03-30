@@ -9,7 +9,6 @@ export const useController = <T extends ControllerAbstract<P>, P extends object>
 
     // Set up the controller when the component is mounted
     useEffect(() => {
-        console.log('Setting up controller');
         memoController.setTriggerUpdate(triggerUpdate);
         memoController.componentCreated();
         return () => memoController.componentDestroy();
