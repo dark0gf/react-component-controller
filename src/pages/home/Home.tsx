@@ -13,7 +13,7 @@ export const Home = () => {
             <div className="grid grid-cols-2 gap-4">
                 {/* Profile Column */}
                 <div className="border p-4 rounded">
-                    <h3 className="text-lg font-semibold mb-2">Profile Component</h3>
+                    <h3 className="text-lg font-semibold mb-2">TodoWithHooks Component</h3>
                     <div className="space-y-4 mb-4">
                         <div>
                             <label className="block mb-2">username:</label>

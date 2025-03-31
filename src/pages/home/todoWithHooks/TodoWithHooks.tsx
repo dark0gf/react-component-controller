@@ -21,7 +21,7 @@ export const TodoWithHooks = (props: TProfile) => {
                     type="text"
                     value={service.newTodoText}
                     onChange={(e) => service.setNewTodoText(e.target.value)}
-                    onKeyPress={handleKeyPress}
+                    onKeyUp={handleKeyPress}
                     placeholder="Add a new todo..."
                     className="border p-2 flex-grow rounded-l"
                 />

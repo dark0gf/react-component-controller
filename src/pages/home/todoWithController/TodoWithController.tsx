@@ -11,13 +11,12 @@ export const TodoWithController = (props: TProfile) => {
             <div className="mt-6">
                 <h2 className="text-xl font-bold mb-4">Todo List</h2>
 
-                {/* Add new todo form */}
                 <div className="flex mb-4">
                     <input
                         type="text"
                         value={state.newTodoText}
                         onChange={(e) => ctrl.updateNewTodoText(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && ctrl.addTodo()}
+                        onKeyUp={(e) => e.key === 'Enter' && ctrl.addTodo()}
                         placeholder="Add a new todo..."
                         className="border p-2 flex-grow rounded-l"
                     />
@@ -29,7 +28,6 @@ export const TodoWithController = (props: TProfile) => {
                     </button>
                 </div>
 
-                {/* Todo list */}
                 <ul className="border rounded divide-y">
                     {state.todos.length === 0 ? (
                         <li className="p-3 text-gray-500">No todos yet. Add one above!</li>

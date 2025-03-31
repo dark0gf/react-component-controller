@@ -1,6 +1,5 @@
 import {TProfile} from "../types.tsx";
 import {useCallback, useEffect, useState} from "react";
-import {fetchProfile} from "../../../services/data.service.ts";
 
 export type Todo = {
     id: number;
